@@ -63,7 +63,6 @@ outputinfo = scriptversion+'_'+timestr+'_b'+str(batch_size)+'_e'+str(epochs)
 dropoutrate = 0.4
 epochs = 200
 batch_size = 8
-#margin = 0.2  # Margin for constrastive loss
 loss='sparse_categorical_crossentropy'
 patience = 20
 num_folds = 5
