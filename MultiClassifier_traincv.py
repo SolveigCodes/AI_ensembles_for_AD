@@ -52,7 +52,7 @@ import math
 timestr = time.strftime("%Y-%m-%d_%H%M")
 print(timestr)
 # Script version
-scriptversion = "Multi1v4traincvNature"
+scriptversion = "Multitraincv"
 print("Script: "+scriptversion)
 
 # Common outputinfo
