@@ -41,8 +41,6 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classifica
 from sklearn.metrics import roc_auc_score, accuracy_score, precision_score, recall_score, f1_score, balanced_accuracy_score
 from imblearn.metrics import specificity_score
 from sklearn.model_selection import KFold, StratifiedShuffleSplit, StratifiedKFold, StratifiedGroupKFold
-#from sklearn.model_selection import StratifiedShuffleSplit
-#from sklearn.model_selection import StratifiedKFold
 from sklearn.utils.multiclass import type_of_target
 from scipy.ndimage import gaussian_filter
 from sklearn.utils import resample
