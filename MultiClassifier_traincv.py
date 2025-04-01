@@ -13,6 +13,7 @@ import numpy as np
 import tensorflow as tf
 from tensorflow import keras
 from keras import layers
+from keras.layers import GroupNormalization, BatchNormalization
 from keras.optimizers import Adam
 from keras.layers import Dropout, Dense, Activation, GlobalAveragePooling3D
 from keras.models import Model
