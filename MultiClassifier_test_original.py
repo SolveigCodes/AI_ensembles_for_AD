@@ -101,8 +101,9 @@ dfile = '/22-12-19/StudyData/DXSUM_PDXCONV_ADNIALL.csv' # Replace with actual fi
 path_bestmodel = '/Checkpoint/archname_fold5_best_model.hdf5' # Replace with actual file location
 print("path best model: ",path_bestmodel) # for control purposes only
 
-## Path to stratification file
-stratpath = '/stratlist_outputinfo.csv' # Replace with actual file location. This file is produced by Multiclassifier_traincv.py
+# Replace with actual file location. This file is produced by Multiclassifier_traincv.py
+# Should be the file from the corresponding architecture
+stratpath = '/stratlist_outputinfo-from-multiclassifier_traincv.csv' 
 
 
 
