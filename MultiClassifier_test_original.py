@@ -11,7 +11,6 @@ url: https://github.com/SolveigCodes/AI_ensembles_for_AD
 
 ##### Libraries
 
-import random
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
@@ -19,13 +18,11 @@ from keras import layers
 from keras.layers import GroupNormalization, BatchNormalization, Dropout
 from keras.optimizers import SGD, Adam
 from keras.models import load_model
-import matplotlib.pyplot as plt
 import os
 import pandas as pd
 import nibabel as nib
 import operator
 from sklearn.model_selection import train_test_split
-from itertools import combinations
 import csv
 import time
 import skimage
@@ -37,29 +34,10 @@ from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, CSVLogger, Early
 from keras import backend as K
 from keras.layers import Dropout, Dense, Activation, GlobalAveragePooling3D
 from keras.models import Model
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, roc_auc_score, matthews_corrcoef
-from sklearn.metrics import roc_auc_score, accuracy_score, precision_score, recall_score, f1_score, balanced_accuracy_score
+from sklearn.metrics import confusion_matrix, roc_auc_score, matthews_corrcoef
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, balanced_accuracy_score
 from imblearn.metrics import specificity_score
-from sklearn.model_selection import KFold, StratifiedShuffleSplit, StratifiedKFold, StratifiedGroupKFold
 from sklearn.utils.multiclass import type_of_target
-from scipy.ndimage import gaussian_filter
-from sklearn.utils import resample
-import math
-
-
-##### Variables for file names
-# Create time string
-timestr = time.strftime("%Y-%m-%d_%H%M")
-print(timestr)
-# Script version
-scriptversion = "Multi1testorig"
-print("Script: "+scriptversion)
-
-# Common outputinfo
-outputinfo = scriptversion+'_'+timestr+'_b'+str(batch_size)+'_e'+str(epochs)+'_f'+str(fold_no)
-
-
-
 ##### Hyperparameters and global variables
 
 dropoutrate = 0.4
@@ -73,7 +51,6 @@ fold_no = 5 # Enter this value to specify which model to use. Here meant for mod
 tf.random.set_seed(1)
 rseed = 77
 
-
 cropdim = 160
 imlength = 160
 imwidth = 160
@@ -83,6 +60,18 @@ target_names = ['CN','MCI','AD']
 
 # metrics
 metrics = ['accuracy','bal_accuracy','recall_n','recall_w','spec_n','spec_w','prec_n','prec_w','F1_n','F1_w','MCC']
+
+
+##### Variables for file names
+# Create time string
+timestr = time.strftime("%Y-%m-%d_%H%M")
+print(timestr)
+# Script version
+scriptversion = "Multi1testorig"
+print("Script: "+scriptversion)
+
+# Common outputinfo
+outputinfo = scriptversion+'_'+timestr+'_b'+str(batch_size)+'_e'+str(epochs)+'_f'+str(fold_no)
 
 
 ##### Load dataset and prepare data
