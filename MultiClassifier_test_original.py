@@ -98,7 +98,7 @@ dfile = '/22-12-19/StudyData/DXSUM_PDXCONV_ADNIALL.csv' # Replace with actual fi
 
 
 ## Path to best model from training that will be used as weights for testing
-path_bestmodel = '/Checkpoint/fold5_best_model.hdf5' # Replace with actual folder name
+path_bestmodel = '/Checkpoint/archname_fold5_best_model.hdf5' # Replace with actual file location
 print("path best model: ",path_bestmodel) # for control purposes only
 
 ## Path to stratification file
