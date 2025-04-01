@@ -9,23 +9,13 @@ url: https://github.com/SolveigCodes/AI_ensembles_for_AD
 
 ##### Libraries
 
-import random
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
 from keras import layers
-from keras.layers import GroupNormalization, BatchNormalization, Dropout
-from keras.optimizers import SGD, Adam
-from keras.models import load_model
-import matplotlib.pyplot as plt
-import os
-import pandas as pd
-import nibabel as nib
-import operator
-from sklearn.model_selection import train_test_split
-from itertools import combinations
-import csv
-import time
+from keras.optimizers import Adam
+from keras.layers import Dropout, Dense, Activation, GlobalAveragePooling3D
+from keras.models import Model
 import skimage
 from skimage import measure
 from classification_models_3D.tfkeras import Classifiers
@@ -33,30 +23,18 @@ from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
 from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, CSVLogger, EarlyStopping
 from keras import backend as K
-from keras.layers import Dropout, Dense, Activation, GlobalAveragePooling3D
-from keras.models import Model
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, roc_auc_score, matthews_corrcoef
-from sklearn.metrics import roc_auc_score, accuracy_score, precision_score, recall_score, f1_score, balanced_accuracy_score
+import os
+import pandas as pd
+import nibabel as nib
+import operator
+from sklearn.model_selection import train_test_split
+import csv
+import time
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, roc_auc_score, matthews_corrcoef
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, balanced_accuracy_score
 from imblearn.metrics import specificity_score
-from sklearn.model_selection import KFold, StratifiedShuffleSplit, StratifiedKFold, StratifiedGroupKFold
+from sklearn.model_selection import KFold
 from sklearn.utils.multiclass import type_of_target
-from scipy.ndimage import gaussian_filter
-from sklearn.utils import resample
-import math
-
-
-
-
-###### Variables for file names
-# Create time string
-timestr = time.strftime("%Y-%m-%d_%H%M")
-print(timestr)
-# Script version
-scriptversion = "Multitraincv"
-print("Script: "+scriptversion)
-
-# Common outputinfo
-outputinfo = scriptversion+'_'+timestr+'_b'+str(batch_size)+'_e'+str(epochs)
 
 ###### Hyperparameters and global variables
 
@@ -81,6 +59,17 @@ target_names = ['CN','MCI','AD']
 # metrics
 metrics = ['accuracy','bal_accuracy','recall_n','recall_w','spec_n','spec_w','prec_n','prec_w','F1_n','F1_w','MCC']
 
+
+###### Variables for file names
+# Create time string
+timestr = time.strftime("%Y-%m-%d_%H%M")
+print(timestr)
+# Script version
+scriptversion = "Multitraincv"
+print("Script: "+scriptversion)
+
+# Common outputinfo
+outputinfo = scriptversion+'_'+timestr+'_b'+str(batch_size)+'_e'+str(epochs)
 
 
 ##### Load dataset and prepare data
@@ -132,14 +121,12 @@ def samplepath(data_path, pfile, dfile):
     list with ethnicity information
     dataframe with columns for stratification based on e.g. sex, educational level etc
     """
-    return img_path, cn_path, ad_path, mci_path, subj_ses_list, subjlist, sesslist, diaglist, dlist, excluded, sxlist, agelist, edulist, mmselist, ethnlist, strat
     img_path = []
     cn_path = []
     ad_path = []
     mci_path = []
     subj_ses_list = []
     diagnoses = []
-    mci_diagnosis = []
     excluded = []
     sxlist = []
     agelist = []
