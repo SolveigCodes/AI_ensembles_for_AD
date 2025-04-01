@@ -603,7 +603,7 @@ print("length test_pred: ", len(test_predlabel))
 print("length test_true: ", len(test_true))
 print("length test_predprob: ", len(test_predprob))
 
-# 2024-06-26 Added age groupstrattest = pd.DataFrame(list(zip(subject, test_labels, gender, agegroup, education, mmse, ethn, test_predlabel, test_true, test_predprob)), columns = ['subj','diag_let','sex', 'age','edu', 'mmse', 'ethn', 'pred', 'true', 'prob'])
+strattest = pd.DataFrame(list(zip(subject, test_labels, gender, agegroup, education, mmse, ethn, test_predlabel, test_true, test_predprob)), columns = ['subj','diag_let','sex', 'age','edu', 'mmse', 'ethn', 'pred', 'true', 'prob'])
 print("length of strattest: ", len(strattest))
 strattest.to_csv('MultiClassifier/Statistics/Strattest/'+outputinfo+'_strattest.csv') # Replace with actual file location
 
