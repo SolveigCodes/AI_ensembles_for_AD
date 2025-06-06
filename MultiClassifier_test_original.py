@@ -492,12 +492,12 @@ strat_hold = stratimp[(stratimp['subj'].isin(x_filt_hold))] # note: this list co
 model.load_weights(path_bestmodel)
 	
 
-##### Evaluate the model
+###### Evaluate the model
 results = model.evaluate(hold_generator, verbose=2)
 print("test loss: ",results[0])
 print("test acc: ",results[1])
 
-# #### Model prediction
+###### Model prediction
 prediction = model.predict(hold_generator, verbose=2)
 
 predprob = []
@@ -513,7 +513,7 @@ count2 = 0
 #print("length of hold_generator: ", len(hold_generator))
 	
 for i in range (len(hold_generator)):
-	for j in range(batch_size): # 2023-12-29 SJEKK DENNE
+	for j in range(batch_size): 
 		true.append(hold_generator[i][1][j])
 		count1+=1
 	count2+=1
@@ -562,7 +562,7 @@ rpredlabel = list(np.argmax(rpredprob, axis=1))
 
 
 
-# Creating list of criteria to sort subgroups	
+## Creating list of criteria to sort subgroups	
 subject = []
 test_labels = []
 gender = []
@@ -600,7 +600,7 @@ print("length of strattest: ", len(strattest))
 strattest.to_csv('MultiClassifier/Statistics/Strattest/'+outputinfo+'_strattest.csv') # Replace with actual file location
 
 
-# # Global evaluation metrics
+## Global evaluation metrics
 
 print("Global evaluation metrics:")
 cm = confusion_matrix(test_true, test_predlabel)
@@ -663,10 +663,10 @@ print("length of is_male: ", len(is_male))
 # print("length of ethn_unknown: ", len(ethn_unknown))
 ## ## ## ##
 
-# Evaluation metrics sex
+## Evaluation metrics sex
 print("Evaluation metrics sex")
 
-# Analysis gender = 'F'
+## Analysis sex = 'F'
 print("Results for female:")
 true_female = []
 for i in range(len(is_female)):
