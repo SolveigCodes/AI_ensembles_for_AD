@@ -565,7 +565,7 @@ rpredlabel = list(np.argmax(rpredprob, axis=1))
 ## Creating list of criteria to sort subgroups	
 subject = []
 test_labels = []
-gender = []
+sx = []
 education = []
 mmse = []
 ethn = []
@@ -575,7 +575,7 @@ agegroup = []
 for i in range(len(x_filt_hold)):
 	subject.append(x_filt_hold[i])
 	test_labels.append(strat_hold[strat_hold['subj']==x_filt_hold[i]].iloc[0]['diag_let'])
-	gender.append(strat_hold[strat_hold['subj']==x_filt_hold[i]].iloc[0]['sex'])
+	sx.append(strat_hold[strat_hold['subj']==x_filt_hold[i]].iloc[0]['sex'])
 	education.append(strat_hold[strat_hold['subj']==x_filt_hold[i]].iloc[0]['edu'])
 	mmse.append(strat_hold[strat_hold['subj']==x_filt_hold[i]].iloc[0]['mmse'])
 	ethn.append(strat_hold[strat_hold['subj']==x_filt_hold[i]].iloc[0]['ethn'])
@@ -595,7 +595,7 @@ print("length test_pred: ", len(test_predlabel))
 print("length test_true: ", len(test_true))
 print("length test_predprob: ", len(test_predprob))
 
-strattest = pd.DataFrame(list(zip(subject, test_labels, gender, agegroup, education, mmse, ethn, test_predlabel, test_true, test_predprob)), columns = ['subj','diag_let','sex', 'age','edu', 'mmse', 'ethn', 'pred', 'true', 'prob'])
+strattest = pd.DataFrame(list(zip(subject, test_labels, sx, agegroup, education, mmse, ethn, test_predlabel, test_true, test_predprob)), columns = ['subj','diag_let','sex', 'age','edu', 'mmse', 'ethn', 'pred', 'true', 'prob'])
 print("length of strattest: ", len(strattest))
 strattest.to_csv('MultiClassifier/Statistics/Strattest/'+outputinfo+'_strattest.csv') # Replace with actual file location
 
