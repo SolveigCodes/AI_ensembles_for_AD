@@ -33,7 +33,7 @@ from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, CSVLogger, Early
 from keras import backend as K
 from keras.layers import Dropout, Dense, Activation, GlobalAveragePooling3D
 from keras.models import Model
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, roc_auc_score, matthews_corrcoef
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, matthews_corrcoef
 from sklearn.metrics import roc_auc_score, accuracy_score, precision_score, recall_score, f1_score, balanced_accuracy_score
 from imblearn.metrics import specificity_score
 from sklearn.model_selection import KFold
@@ -144,7 +144,6 @@ def normalize(data):
     """
     normvalue = []
     for i in range (len(data)):
-        # print("length of data: ", len(data)) # 2023-12-29 debug
         n = (data[i] - np.min(data[i])) / (np.max(data[i]) - np.min(data[i]))
         normvalue.append(n)
         
@@ -238,7 +237,7 @@ def evalmetric(true, pred, metrics):
 class DataGenerator(keras.utils.Sequence):
     'Generates data for Keras'
     def __init__(self, list_paths, labels, batch_size=8, dim=(imlength,imwidth,imheight), n_channels=1,
-                 n_classes=2, shuffle=False):
+                 n_classes=3, shuffle=False):
         'Initialization'
         self.dim = dim
         self.batch_size = batch_size
@@ -357,7 +356,7 @@ hold_partition = {'hold':x_hold2}
 # Parameter dictionaries for generators
 params = {'dim': (imlength,imwidth,imheight),
          'batch_size': batch_size,
-         'n_classes': 2,
+         'n_classes': 3,
          'n_channels': 1,
          'shuffle': False}
 
@@ -378,7 +377,7 @@ hold_generator = DataGenerator(hold_partition['hold'], labels, **params)
 # x = layers.AveragePooling3D(pool_size=(2, 2, 2))(x) 
 # x = layers.Flatten()(x)
 # normal_layer = tf.keras.layers.BatchNormalization()(x)
-# output = layers.Dense(3, activation="softmax")(normal_layer)  # NEED 3 HERE BECAUSE OF 3 CLASSES
+# output = layers.Dense(3, activation="softmax")(normal_layer)
 # model = keras.Model(input, output)
 # model.summary()
 
@@ -468,7 +467,7 @@ model.summary()
 # # Fully connected layer 		
 # x = layers.Flatten()(x)
 # x = layers.Dropout(dropoutrate)(x)
-# x = layers.Dense(128)(x) # feat_dim
+# x = layers.Dense(128)(x)
 # x = layers.Dropout(dropoutrate)(x)
 # output = layers.Dense(3, activation="softmax")(x)
 # model = keras.Model(input, output)
